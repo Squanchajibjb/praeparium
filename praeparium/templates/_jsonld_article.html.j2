@@ -1,0 +1,13 @@
+﻿<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ (article.title or "Praeparium Article") | tojson }},
+  "author": {
+    "@type": "Person",
+    "name": {{ ((author.display_name) if author else "Praeparium Editorial") | tojson }}
+  },
+  "datePublished": {{ now_iso | tojson }},
+  "dateModified": {{ now_iso | tojson }}
+}
+</script>

@@ -1,0 +1,27 @@
+{% import "_macros.md.j2" as ui %}
+
+
+{{ ui.section_heading(1, article.title or "Untitled Guide") }}
+
+
+## TL;DR
+- {{ article.primary_keyword or "Quick guide" }} — for {{ ui.list_join(article.personas) }}
+
+
+## Overview
+{{ ui.safe(outline.get("overview"), "What this solves and when to use it.") }}
+
+
+## Steps (Checklist)
+{{ ui.safe(outline.get("steps_short"), "- Make a list\n- Gather tools\n- Follow steps\n- Review safety") }}
+
+
+## Detailed Steps
+{{ ui.safe(outline.get("steps_long"), "### Step 1\nDo the setup.\n\n### Step 2\nTest and verify.") }}
+
+
+{{ ui.quote_block(article.quote_text, article.quote_source) }}
+{{ ui.stat_line(article.stats_value, article.stats_source) }}
+
+
+{{ ui.related_list(related_links) }}

@@ -1,0 +1,21 @@
+bundle_slug: water-prep
+audience:
+  - urban preppers
+  - families new to preparedness
+purpose: >
+  Give readers a clear, credible path to water readiness (storage, sanitation, filtration),
+  with actionable checklists and product guidance.
+success_criteria:
+  - "Publication gate pass rate ≥ 0.9 across articles"
+  - "Flesch–Kincaid ≤ 8.0 and style ≥ 0.85"
+  - "≥ 3 internal links per article; FAQ present"
+scope:
+  includes:
+    - hub: water-preparedness-ladder
+    - guide: sanitize-water-bricks-guide
+    - review: water-storage-containers-review
+    - roundup: emergency-filtration-roundup
+  excludes:
+    - non-water emergency topics (food, power)
+risks:
+  - Outdated standards claims (NSF/ANSI); mitigated by reviewer sign-off

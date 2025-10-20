@@ -1,0 +1,31 @@
+{% import "_macros.md.j2" as ui %}
+
+
+{{ ui.section_heading(1, article.title or "Best Picks") }}
+
+
+## At a Glance
+{{ ui.safe(outline.get("at_a_glance"), "Top picks by use-case and budget.") }}
+
+
+## Editor’s Choice
+{{ ui.safe(outline.get("editors_choice"), "Balanced performance and reliability.") }}
+
+
+## Budget Pick
+{{ ui.safe(outline.get("budget_pick"), "Good enough for most, lowest price.") }}
+
+
+## Premium Pick
+{{ ui.safe(outline.get("premium_pick"), "Top-tier performance and build.") }}
+
+
+## Comparison Summary
+{{ ui.safe(outline.get("summary"), "How these picks differ and when to choose each.") }}
+
+
+{{ ui.quote_block(article.quote_text, article.quote_source) }}
+{{ ui.stat_line(article.stats_value, article.stats_source) }}
+
+
+{{ ui.related_list(related_links) }}

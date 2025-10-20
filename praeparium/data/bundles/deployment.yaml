@@ -1,0 +1,23 @@
+﻿targets:
+  preview_dir: site
+  markdown_out_dir: out
+
+qa:
+  export_static_html: true
+  fail_on_publication_gate: true
+
+review:
+  required_roles:
+    - editor
+    - domain_reviewer
+  reviewer_signoff:
+    name: "M. McIntosh"
+    role: "editor"
+    date: "2025-10-18"
+
+checklist:
+  - interlinks_validated
+  - style_passed
+  - fk_within_target
+  - narrative_flow_present
+  - reviewer_signoff_recorded

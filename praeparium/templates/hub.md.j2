@@ -1,0 +1,27 @@
+{% import "_macros.md.j2" as ui %}
+
+
+{{ ui.section_heading(1, article.title or "Untitled Hub") }}
+
+
+## TL;DR
+- {{ article.primary_keyword or "Key takeaways" }} — quick summary for {{ ui.list_join(article.personas) }}
+
+
+## Why It Matters
+{{ ui.safe(outline.get("why"), "Every prepper needs the essentials squared away before an emergency.") }}
+
+
+## The Framework
+{{ ui.safe(outline.get("framework"), "Use a simple time-ladder (72h → 1w → 30d) to stage purchases and storage.") }}
+
+
+## How to Prepare
+{{ ui.safe(outline.get("how"), "Start with stored water, then add treatment and containers. Rotate on a schedule.") }}
+
+
+{{ ui.quote_block(article.quote_text, article.quote_source) }}
+{{ ui.stat_line(article.stats_value, article.stats_source) }}
+
+
+{{ ui.related_list(related_links) }}

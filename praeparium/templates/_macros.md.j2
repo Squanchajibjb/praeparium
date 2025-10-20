@@ -1,0 +1,34 @@
+{# Fallback helpers #}
+{% macro safe(s, default="") %}{{ (s or default) | trim }}{% endmacro %}
+{% macro list_join(items, sep=", ", default="readers") %}
+{{ (items|list if items is not none else []) | join(sep) if (items and items|length) else default }}
+{% endmacro %}
+
+
+{% macro section_heading(level, text) -%}
+{{ ("#" * level) ~ " " ~ text }}
+{%- endmacro %}
+
+
+{% macro quote_block(q, src) -%}
+{% if q %}
+> "{{ q | trim }}"{% if src %} — *{{ src | trim }}*{% endif %}
+{% endif %}
+{%- endmacro %}
+
+
+{% macro stat_line(value, source, year="2025") -%}
+{% if value %}
+_In {{ year }}, {{ value }}{% if source %} ({{ source }}){% endif %}._
+{% endif %}
+{%- endmacro %}
+
+
+{% macro related_list(links) -%}
+{% if links and links|length %}
+## Related
+{% for slug, title in links %}
+- [{{ title or slug }}](/{{ slug }})
+{% endfor %}
+{% endif %}
+{%- endmacro %}

@@ -1,0 +1,108 @@
+﻿bundle_slug: water-prep
+article_plan:
+  - slug: emergency-filtration-roundup
+    title: The Best Emergency Water Filters (Hands-on Review)
+    template: review
+    meta:
+      hero_image: /img/water/filters-hero.jpg
+      seo_description: A practical, plain-English review of popular emergency water filters with clear picks by use case.
+      author: M. McIntosh
+      date: 2025-10-20
+
+    review:
+      who_this_is_for:
+        - Preppers starting from zero
+        - Hikers day/overnight trips
+        - Families making a 2-week kit
+      what_matters_most:
+        - flow_rate
+        - pathogen_removal
+        - field_serviceability
+        - total_cost
+      test_notes:
+        water_types:
+          - tap_with_tea
+          - muddy_puddle
+          - salty_hint
+        measurements:
+          - time_to_1L
+          - clogs_per_5L
+          - taste_notes
+      picks:
+        overall: sawyer_squeeze
+        budget: lifestraw
+        family: gravity_bag_10l
+        ultralight: sawyer_micro
+      products:
+        - id: sawyer_squeeze
+          name: Sawyer Squeeze
+          price: 39
+          pros: ["fast flow", "field-backflush", "tiny"]
+          cons: ["threads can drip"]
+        - id: lifestraw
+          name: LifeStraw
+          price: 19
+          pros: ["cheap", "simple"]
+          cons: ["slow", "single-user only"]
+        - id: gravity_bag_10l
+          name: 10L Gravity Bag
+          price: 69
+          pros: ["hands-free", "family-ready"]
+          cons: ["bulky", "drying time"]
+      verdict:
+        tl_dr: "Go Sawyer Squeeze for most; add a 10L gravity bag for families."
+        why_trust: "Methodical tests on multiple water types; see timings and notes below."
+        care_tips: ["Backflush every 2–3L", "Air-dry before storage", "Rotate annually"]
+
+  - slug: water-storage-containers-review
+    title: "Best Water Storage Containers for Home Prepping"
+    template: review.md.j2
+    primary_keyword: "water containers"
+    personas:
+      - families
+      - suburban
+    interlink_out:
+      - water-preparedness-ladder
+      - emergency-filtration-roundup
+    author_id: jdoe
+    quote_text: "Food-grade HDPE is the safer long-term choice."
+    quote_source: "Jane Doe, PE"
+    stats_value: "HDPE #2 is the most common food-safe resin for water storage"
+    stats_source: "NSF / Resin ID #2"
+
+  - slug: sanitize-water-bricks-guide
+    title: "How to Sanitize and Rotate Water Bricks"
+    template: guide.md.j2
+    primary_keyword: "sanitize water bricks"
+    personas:
+      - apartment preppers
+    interlink_out:
+      - water-preparedness-ladder
+      - water-storage-containers-review
+    author_id: jdoe
+    quote_text: "Unscented household bleach remains the most accessible disinfectant."
+    quote_source: "Jane Doe, PE"
+
+  - slug: emergency-filtration-roundup
+    title: "Emergency Water Filtration Options Compared"
+    template: roundup.md.j2
+    primary_keyword: "emergency filtration"
+    personas:
+      - families
+      - hikers
+    interlink_out:
+      - water-preparedness-ladder
+      - water-storage-containers-review
+      - sanitize-water-bricks-guide
+    author_id: jdoe
+    quote_text: "PFAS claims should reference NSF/ANSI 53 or 401 certifications."
+    quote_source: "Jane Doe, PE"
+
+editorial_targets:
+  fk_max: 8.0
+  style_min: 0.85
+  min_words: 900
+  min_sections: 6
+  narrative_flow_required: true
+
+

@@ -1,0 +1,27 @@
+﻿editorial_targets:
+  fk_max: 8.0
+  style_min: 0.85
+  min_words: 900
+  min_sections: 6
+  narrative_flow_required: true
+  reviewer_signoff_required: true
+
+publication_gate:
+  checks:
+    - fk_grade
+    - style_score
+    - narrative_flow
+    - section_count
+    - word_count
+
+interlinks:
+  hub_slug: water-preparedness-ladder
+  spokes:
+    - water-storage-containers-review
+    - sanitize-water-bricks-guide
+    - emergency-filtration-roundup
+  enforce_bidirectional: true
+
+# NEW: tell the auditor which domain checks apply
+domain_validation_packs:
+  - water_standards

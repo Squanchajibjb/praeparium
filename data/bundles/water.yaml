@@ -1,0 +1,61 @@
+﻿domain: Water
+category:
+  seed_concept: "Emergency Water Preparedness"
+  primary_keyword: "emergency water storage"
+personas:
+  - code: URBAN
+  - code: FAMILY
+harness:
+  slug: "water-preparedness-time-ladder"
+  meta_description: "A practical time-ladder for emergency water."
+  author_id: "jane-doe"
+
+article_plan:
+  - article_id: hub-water-ladder
+    article_type: HUB
+    title: "Emergency Water Preparedness: The Timeframe Ladder"
+    slug: "water-preparedness-time-ladder"
+    primary_keyword: "emergency water storage"
+    template: hub.md.j2
+    personas: ["URBAN","FAMILY"]
+    # narrative vars to satisfy QA
+    quote_text: "Store water before the storm, not during it."
+    quote_source: "Jane Doe, PE"
+    stats_value: "72% of households lack a 3-day water plan"
+    stats_source: "FEMA 2024"
+    internal_links: ["/about","/contact","/water-basics"]
+    external_links:
+      - "https://www.ready.gov/water"
+      - "https://www.cdc.gov/healthywater/emergency/index.html"
+    faqs:
+      - {q: "How much water do I need?", a: "1 gallon per person per day minimum."}
+      - {q: "Do I rotate stored water?", a: "Yes, every 6–12 months."}
+      - {q: "Can I reuse milk jugs?", a: "Avoid them; plastics can leach."}
+      - {q: "Do filters remove PFAS?", a: "Only certain certified filters."}
+      - {q: "Does boiling remove chemicals?", a: "No—boiling handles microbes."}
+  - article_id: review-bottled
+    article_type: REVIEW
+    title: "Bottled Water & Pouches (72 Hours)"
+    slug: "bottled-water-pouches-72h"
+    primary_keyword: "best water pouches emergency"
+    template: review.md.j2
+    personas: ["URBAN"]
+    dependencies: ["hub-water-ladder"]
+    # narrative vars for QA/style
+    quote_text: "Pouches are space-efficient for apartments."
+    quote_source: "Jane Doe, PE"
+    stats_value: "Most outages resolve within 72 hours in cities"
+    stats_source: "US EIA 2025"
+    internal_links:
+      - "/water-preparedness-time-ladder"
+      - "/water-basics"
+      - "/filters-for-preppers"
+    external_links:
+      - "https://www.ready.gov/water"
+      - "https://www.epa.gov/ground-water-and-drinking-water"
+    faqs:
+      - {q: "How many pouches for four people?", a: "48 for 72 hours (1 gal/person/day)."}
+      - {q: "Do pouches expire?", a: "Often 3–5 years—check label."}
+      - {q: "Cool storage?", a: "Yes; cool, dark extends shelf life."}
+      - {q: "Freeze?", a: "Usually fine—check manufacturer."}
+      - {q: "Cases vs pouches?", a: "Pouches win on storage efficiency."}

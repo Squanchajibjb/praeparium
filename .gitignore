@@ -1,0 +1,26 @@
+﻿# Python cache and virtual envs
+__pycache__/
+*.py[cod]
+.venv/
+env/
+venv/
+
+# Build / dist artifacts
+build/
+dist/
+*.egg-info/
+out/
+
+# Backups / reports / local helpers
+__backup_praeparium/
+Project_Location_Report.md
+project_location_report.json
+where_is_praeparium.py
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,29 @@
+﻿goal: Publish a cohesive, accurate Water Preparedness mini-site (hub + spokes) suitable for general readers.
+
+personas:
+  - Urban preppers new to water storage
+  - Families preparing for outages
+  - Apartment dwellers with limited space
+
+scope:
+  includes:
+    - Water preparedness ladder (overview hub)
+    - Container types & sizing (review/guide)
+    - Sanitization methods for stored water (how-to)
+    - Emergency filtration options (roundup)
+  excludes:
+    - Whole-home plumbing redesign
+    - Off-grid well drilling
+
+success_criteria:
+  editorial:
+    - reading_level_fk_max: 8.0
+    - style_min: 0.85
+    - narrative_flow_required: true
+    - min_words: 900
+    - min_sections: 6
+  links:
+    - hub_links_to_all_spokes: true
+    - every_spoke_links_back_to_hub: true
+  compliance:
+    - reviewer_signoff_required: true

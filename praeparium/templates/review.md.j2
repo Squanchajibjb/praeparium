@@ -1,0 +1,31 @@
+{% import "_macros.md.j2" as ui %}
+
+
+{{ ui.section_heading(1, article.title or "Untitled Review") }}
+
+
+## TL;DR
+- Verdict: {{ ui.safe(outline.get("verdict"), "Good for most readers; check specs and certifications.") }}
+
+
+## Who Should Choose This
+{{ ui.safe(outline.get("who_for"), "Best for readers who want a reliable, straightforward option.") }}
+
+
+## Pros & Cons
+{{ ui.safe(outline.get("pros_cons"), "**Pros**: easy to use, durable\n\n**Cons**: price, availability") }}
+
+
+## What to Watch Out For
+{{ ui.safe(outline.get("watchouts"), "Confirm materials and certifications before purchase.") }}
+
+
+## Alternatives
+{{ ui.safe(outline.get("alternatives"), "- Option A — lighter\n- Option B — cheaper") }}
+
+
+{{ ui.quote_block(article.quote_text, article.quote_source) }}
+{{ ui.stat_line(article.stats_value, article.stats_source) }}
+
+
+{{ ui.related_list(related_links) }}
