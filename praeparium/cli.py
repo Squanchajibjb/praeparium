@@ -1,30 +1,35 @@
-﻿from __future__ import annotations
-import json
-from pathlib import Path
-import typer
+from __future__ import annotations
+import typer, os
+from .sop3.render import render_bundle
+from .qa.checks import audit_path
+from .writer import write_from_sourcepack  # NEW
 
-app = typer.Typer(add_completion=False)
+app = typer.Typer(help="Praeparium content automation CLI")
 
 @app.command("bundle-generate")
-def bundle_generate(bundle: str, out: str = "out"):
+def bundle_generate(plan: str, out: str = "out"):
     """
-    Minimal placeholder that proves the CLI wiring works.
-    Replace with your real implementation once the shell detects 'praeparium'.
+    If 'plan' ends with .json, treat it as a Source Pack and generate a single article.
+    Otherwise treat as YAML bundle with items[] and render templates.
     """
-    outdir = Path(out)
-    outdir.mkdir(parents=True, exist_ok=True)
-    manifest = {"bundle": Path(bundle).name, "articles": [], "note": "CLI wiring OK"}
-    (outdir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    typer.echo(f"Rendered 0 articles → {outdir}")
-    typer.echo("✅ CLI wiring OK (placeholder)")
+    ext = os.path.splitext(plan)[1].lower()
+    if ext == ".json":
+        ok = write_from_sourcepack(plan, out)
+    else:
+        ok = render_bundle(plan, out)
+
+    if not ok:
+        raise typer.Exit(code=1)
+    typer.echo(f"✅ Generated to {out}")
 
 @app.command("qa-report")
-def qa_report(out_dir: str = "out"):
-    p = Path(out_dir) / "manifest.json"
-    if p.exists():
-        typer.echo(p.read_text(encoding="utf-8"))
-    else:
-        typer.echo("No manifests found.")
-
-if __name__ == "__main__":
-    app()
+def qa_report(path: str = "out"):
+    """Run QA checks over generated markdown files."""
+    failed = audit_path(path)
+    if failed:
+        typer.echo("❌ QA failures detected:")
+        for f, errs in failed.items():
+            for e in errs:
+                typer.echo(f" - {f}: {e}")
+        raise typer.Exit(code=2)
+    typer.echo("✅ QA passed")
