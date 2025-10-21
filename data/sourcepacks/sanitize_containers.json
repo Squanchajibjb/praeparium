@@ -1,0 +1,37 @@
+{
+  "stance": {
+    "audience": "People preparing tap water storage at home",
+    "promise": "Clean and disinfect any water container correctly before filling",
+    "voice": "plain, step-by-step, safety-first"
+  },
+  "claims_checklist": [
+    "Include materials check: food-grade HDPE, no dairy/juice residue containers",
+    "Provide step-by-step sanitization with unscented bleach, and safe rinse",
+    "State bleach concentrations (common 5–8.25%) and per-liter/mL guidance",
+    "Include label/date instructions and rotation cadence (6–12 months)",
+    "At least 3 authoritative sources and 1 caution about fumes/skin contact"
+  ],
+  "quotes": [
+    {
+      "quote": "Use household bleach (5–9% sodium hypochlorite) for disinfecting water containers.",
+      "source": "CDC / EPA guidance",
+      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+    },
+    {
+      "quote": "After sanitizing with bleach, rinse thoroughly with safe drinking water before filling.",
+      "source": "CDC",
+      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+    },
+    {
+      "quote": "Label containers with date and contents; rotate stored water every six to twelve months.",
+      "source": "CDC",
+      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+    }
+  ],
+  "sources": [
+    {"title": "CDC Emergency Water Supply", "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"},
+    {"title": "EPA Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
+    {"title": "FEMA Preparedness Guide", "url": "https://www.ready.gov/water"}
+  ],
+  "slug": "sanitize-water-containers"
+}

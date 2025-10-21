@@ -1,0 +1,42 @@
+{
+  "stance": {
+    "audience": "Households preparing for water outages in apartments or homes",
+    "promise": "A simple time ladder to size, store, and maintain safe water",
+    "voice": "plain, confident, evidence-based"
+  },
+  "claims_checklist": [
+    "Explain 72h, 2w, 30d+ ladder and per-person daily volume",
+    "Quantify volumes for a 2-person and 4-person household per rung",
+    "Call out hidden sources: hot water cylinder, toilet cistern (not for drinking), ice, pipes",
+    "Include rotation doctrine: label, date, 6–12 months",
+    "Include at least 3 authoritative sources and 1 forum insight"
+  ],
+  "quotes": [
+    {
+      "quote": "Store at least one gallon per person per day for three days.",
+      "source": "CDC Emergency Water Supply",
+      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+    },
+    {
+      "quote": "Emergency disinfection of drinking water can be done with household bleach.",
+      "source": "EPA Emergency Disinfection",
+      "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"
+    },
+    {
+      "quote": "A typical 40–50 gallon hot water tank can be a backup water source if isolated and drawn safely.",
+      "source": "FEMA/Ready",
+      "url": "https://www.ready.gov/water"
+    },
+    {
+      "quote": "Many apartment preppers keep 5-gallon stackables under beds and couches to distribute weight.",
+      "source": "Reddit r/preppers",
+      "url": "https://www.reddit.com/r/preppers"
+    }
+  ],
+  "sources": [
+    {"title": "CDC Emergency Water Supply", "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"},
+    {"title": "EPA Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
+    {"title": "FEMA Preparedness Guide", "url": "https://www.ready.gov/water"}
+  ],
+  "slug": "water-preparedness-time-ladder"
+}

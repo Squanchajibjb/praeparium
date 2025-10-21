@@ -24,18 +24,18 @@
       "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"
     },
     {
+      "quote": "55-gallon water barrels must rest on strong, level surfaces; full weight exceeds 450 lb (200 kg).",
+      "source": "FEMA Family Preparedness Guide",
+      "url": "https://www.ready.gov/water"
+    },
+    {
       "quote": "Rotate stored tap water every six to twelve months.",
       "source": "CDC",
       "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
     },
     {
-      "quote": "A 55-gallon drum of water weighs roughly 460 lb (208 kg) when full.",
-      "source": "Weight calc (8.34 lb/gal reference)",
-      "url": "https://en.wikipedia.org/wiki/Gallon#Weight_of_water"
-    },
-    {
       "quote": "Apartment preppers recommend stackable cubes to spread load and keep water under beds.",
-      "source": "Reddit r/preppers (anecdotal insight)",
+      "source": "Reddit r/preppers (2024)",
       "url": "https://www.reddit.com/r/preppers"
     }
   ],
