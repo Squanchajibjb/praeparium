@@ -10,9 +10,9 @@ except Exception:
 
 
 def _load_sourcepack(path: str) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as f:
+    # utf-8-sig will transparently strip a BOM if present
+    with open(path, "r", encoding="utf-8-sig") as f:
         return json.load(f)
-
 
 def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: str | None = None) -> bool:
     """
