@@ -24,3 +24,9 @@ where_is_praeparium.py
 # OS
 .DS_Store
 Thumbs.db
+
+# never commit secrets
+praeparium/\C:\Users\mcint\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1.txt
+.env
+*.env
+
