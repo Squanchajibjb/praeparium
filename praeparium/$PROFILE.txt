@@ -1,0 +1,10 @@
+# --- Praeparium environment variables ---
+$env:OPENAI_API_KEY = "REDACTED"
+$env:OPENAI_PROJECT = "proj_YcAomf8cqIGuZUgc5D4mrdml"
+$env:OPENAI_ORG_ID  = "org-CS4vKLbHPAf5wSnCQoOGr5Wx"
+$env:PRAEPARIUM_MODEL = "gpt-4o"
+# -----------------------------------------
+
+
+
+

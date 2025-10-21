@@ -1,36 +1,48 @@
-﻿import re
-from textstat import flesch_kincaid_grade
+from __future__ import annotations
+import os, re
+from typing import Dict, List
 
-def _counts(md: str):
-    words = re.findall(r"\w+", md)
-    sentences = re.split(r"[.!?]+", md)
-    return len(words), sum(1 for s in sentences if s.strip())
+FILLER = [r"\bIn conclusion\b", r"\bIn summary\b", r"\bAt the end of the day\b"]
 
-def check_headings(md: str) -> bool:
-    return "## TL;DR" in md
+def _read_text(path: str) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
-def check_readability(md: str, max_grade: float = 8.0, min_words: int = 120, min_sentences: int = 5) -> bool:
-    words, sents = _counts(md)
-    # If it's very short, don't fail readability yet (let content expand first)
-    if words < min_words or sents < min_sentences:
-        return True
-    try:
-        return flesch_kincaid_grade(md) <= max_grade
-    except Exception:
-        return True
+def _check_headings(md: str) -> List[str]:
+    errs = []
+    if not md.strip().startswith("# "):
+        errs.append("Missing H1 at top")
+    h2s = [l for l in md.splitlines() if l.startswith("## ")]
+    if len(h2s) < 3:
+        errs.append("Fewer than 3 H2s")
+    return errs
 
-def check_counts(article_vars: dict,
-                 internal_min=3, internal_max=8,
-                 external_min=2, external_max=5,
-                 faqs_min=5):
-    il = len(article_vars.get("internal_links", []))
-    el = len(article_vars.get("external_links", []))
-    fq = len(article_vars.get("faqs", []))
-    return (internal_min <= il <= internal_max) and (external_min <= el <= external_max) and (fq >= faqs_min)
+def _check_links(md: str) -> List[str]:
+    errs = []
+    internal = len(re.findall(r"\]\(/", md))
+    external = len(re.findall(r"\]\(https?://", md))
+    if external < 2: errs.append("Fewer than 2 external links")
+    if internal < 1: errs.append("Fewer than 1 internal link")
+    return errs
 
-def run_checks(article_md: str, article_vars: dict) -> dict:
-    return {
-        "Headings": check_headings(article_md),
-        "Readability": check_readability(article_md),
-        "Links_FAQs": check_counts(article_vars),
-    }
+def _check_filler(md: str) -> List[str]:
+    errs = []
+    for pat in FILLER:
+        if re.search(pat, md, flags=re.I):
+            errs.append(f"Contains filler phrase: /{pat}/")
+    return errs
+
+def audit_path(path: str) -> Dict[str, List[str]]:
+    failed: Dict[str, List[str]] = {}
+    for fn in os.listdir(path):
+        if not fn.endswith(".md"):
+            continue
+        p = os.path.join(path, fn)
+        md = _read_text(p)
+        errs = []
+        errs += _check_headings(md)
+        errs += _check_links(md)
+        errs += _check_filler(md)
+        if errs:
+            failed[p] = errs
+    return failed

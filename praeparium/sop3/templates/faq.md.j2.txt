@@ -1,0 +1,19 @@
+# {{ title }}
+
+## FAQs
+{% for q in faqs %}
+### {{ q.q }}
+{{ q.a }}
+{% endfor %}
+
+{% if hub_link %}[Return to Hub]({{ hub_link.href }}){% endif %}
+
+### Related articles
+{% for s in sibling_spokes %}
+- [{{ s.title }}]({{ s.href }})
+{% endfor %}
+
+## Sources & further reading
+{% for url in external_links %}
+- [Source {{ loop.index }}]({{ url }})
+{% endfor %}

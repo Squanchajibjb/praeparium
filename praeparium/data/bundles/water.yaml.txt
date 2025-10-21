@@ -1,0 +1,95 @@
+﻿defaults:
+  external_source: https://www.cdc.gov/healthywater/
+  external_links:
+    - https://www.cdc.gov/healthywater/emergency/
+    - https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water
+
+
+items:
+  - type: hub
+    slug: water-hub
+    title: Water Preparedness Hub
+    tldr: Start with 3 days water, scale to 2 weeks, then 30+ days.
+    audience: Urban families and apartment dwellers preparing for outages.
+    timeframe_ladder: |
+      - 72 hours: 3–4 L/person/day, store-bought bottles or stackables.
+      - 1–2 weeks: barrels or cubes; rotate every 6–12 months.
+      - 30+ days: mixed storage + filtration (gravity + chemical).
+    core_decisions:
+      - attribute: Storage vessels
+        benefit: Right size for your space
+        body: Compare bottles, stackables, cubes, barrels; mind BPA-free HDPE.
+      - attribute: Treatment
+        benefit: Safe to drink without over-treating
+        body: Match method to risk (chlorine, NaDCC, boil, UV).
+    spokes:
+      internal_title: Best Water Storage Containers
+      internal_slug: best-water-containers
+      external_title: CDC Water Storage Guidance
+      external_url: https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html
+    faqs:
+      - q: How much water do I need?
+        a: Plan 3–4 L per person per day; more in hot climates.
+      - q: Do I need treatment if it’s city water?
+        a: For storage >6 months, treat or rotate; follow local guidance.
+
+  - type: guide
+    slug: sanitize-water-containers
+    title: How to Sanitize Water Containers at Home
+    tldr: Use unscented bleach; rinse thoroughly; air-dry.
+    steps:
+      - title: Pre-rinse
+        body: Rinse with clean tap water.
+      - title: Disinfect
+        body: Use 1 tsp bleach per litre; contact time 2 minutes.
+      - title: Rinse & dry
+        body: Rinse twice; air-dry inverted.
+    cost: "≤ NZD $5 in consumables"
+    time: "30–45 minutes"
+    tools: ["measuring spoon", "funnel", "clean cloth"]
+    mistakes: ["Using scented bleach", "Skipping the final rinse"]
+    faqs:
+      - q: Can I use vinegar instead?
+        a: Vinegar is not a high-level disinfectant for pathogens of concern.
+    hub_slug: water-hub
+    external_source: https://www.cdc.gov/
+
+  - type: review
+    slug: best-water-containers
+    title: Best Water Storage Containers (2025)
+    verdict: Stackables for apartments; barrels for garages; cubes for flexibility.
+    audience: Apartment dwellers and homeowners needing different footprints.
+    testing: Hands-on fills, drop tests, seal checks; user feedback scoring.
+    products:
+      - name: AquaStack 5-Gal
+        short: Best for tight spaces
+        specs: "HDPE, stackable, food-grade"
+        pros: "Stacks safely; easy spigot"
+        cons: "More seams than barrels"
+      - name: BlueBarrel 55-Gal
+        short: Best bulk storage
+        specs: "HDPE, 55-gallon, bung cap"
+        pros: "Lowest cost per litre"
+        cons: "Heavy when full; needs space"
+    factors:
+      - attribute: Material
+        benefit: Food-safe & stable
+        body: Prefer HDPE 2; avoid reused chemical drums.
+      - attribute: Footprint
+        benefit: Fits your living area
+        body: Stackables fit closets; barrels fit garages.
+    concerns: ["Plastic taste", "Spigot leaks"]
+    faqs:
+      - q: How often to rotate?
+        a: 6–12 months, or per manufacturer/authority guidance.
+    external_source: https://www.epa.gov/
+
+  - type: faq
+    slug: water-faqs
+    title: Water Preparedness FAQs
+    faqs:
+      - q: Is boiling enough?
+        a: Bring to a rolling boil for 1 minute (3 minutes at higher altitudes).
+      - q: Do I need a filter?
+        a: For turbid sources, yes; combine with chemical/boil.
+    hub_slug: water-hub

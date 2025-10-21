@@ -1,0 +1,46 @@
+# {{ title }}
+
+> **Quick verdict:** {{ verdict }}
+
+## Who it’s for
+{{ audience }}
+
+## How we tested
+{{ testing }}
+
+## Mini-reviews
+{% for p in products %}
+### {{ p.name }} — {{ p.short }}
+Specs: {{ p.specs }}
+Pros: {{ p.pros }}
+Cons: {{ p.cons }}
+{% endfor %}
+
+## Buying factors
+{% for f in factors %}
+### {{ f.attribute }}: {{ f.benefit }}
+{{ f.body }}
+{% endfor %}
+
+## Common concerns
+{% for c in concerns %}
+- {{ c }}
+{% endfor %}
+
+## FAQs
+{% for q in faqs %}
+**Q: {{ q.q }}**  
+A: {{ q.a }}
+{% endfor %}
+
+{% if hub_link %}[Read our Hub]({{ hub_link.href }}){% endif %}
+
+### Related articles
+{% for s in sibling_spokes %}
+- [{{ s.title }}]({{ s.href }})
+{% endfor %}
+
+## Sources & further reading
+{% for url in external_links %}
+- [Source {{ loop.index }}]({{ url }})
+{% endfor %}
