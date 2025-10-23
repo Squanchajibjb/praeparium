@@ -1,0 +1,56 @@
+{
+  "pack_id": "REPLACE_ME",
+  "domain": "Food",
+  "version": "1.0",
+  "title": "Best Emergency Food Kits (2025)",
+  "slug": "best-emergency-food-kits",
+
+  "sources": [
+    {
+      "id": "ready-gov-food",
+      "title": "Ready.gov — Food & Water in an Emergency",
+      "url": "https://www.ready.gov/food",
+      "publisher": "FEMA/Ready",
+      "accessed": "2025-10-23"
+    },
+    {
+      "id": "usda-food-safety",
+      "title": "USDA — Emergency Preparedness: Food Safety",
+      "url": "https://www.usda.gov/food-safety/emergencies",
+      "publisher": "USDA",
+      "accessed": "2025-10-23"
+    }
+  ],
+
+  "claims_checklist": [
+    "Shelf-life claims must cite manufacturer or lab validation.",
+    "Calorie counts must provide kcal/day and serving math.",
+    "Allergen / dietary labels (gluten-free, vegan) must link to official spec."
+  ],
+
+  "products": [],
+
+  "comparison_columns": [
+    "name", "brand", "calories_per_day", "days", "total_kcal", "dietary_flags", "price_usd"
+  ],
+
+  "articles": [
+    {
+      "article_id": "emergency-food-hub",
+      "type": "HUB",
+      "slug": "emergency-food-preparedness"
+    },
+    {
+      "article_id": "best-emergency-food-kits",
+      "type": "REVIEW",
+      "slug": "best-emergency-food-kits",
+      "require_comparison_table": true
+    },
+    {
+      "article_id": "how-to-store-emergency-food",
+      "type": "GUIDE",
+      "slug": "how-to-store-emergency-food",
+      "require_comparison_table": false
+    }
+  ]
+}
