@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json, os, pathlib, re
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 # OpenAI Python SDK >= 1.0
 try:
@@ -9,10 +9,14 @@ except Exception:
     OpenAI = None
 
 
+# -----------------------------
+# Helpers
+# -----------------------------
 def _load_sourcepack(path: str) -> Dict[str, Any]:
     # utf-8-sig will transparently strip a BOM if present
     with open(path, "r", encoding="utf-8-sig") as f:
         return json.load(f)
+
 
 def _fix_encoding_glitches(text: str) -> str:
     # Common cp1252/UTF-8 artifacts seen in outputs
@@ -36,36 +40,81 @@ def _fix_encoding_glitches(text: str) -> str:
         text = text.replace(bad, good)
     return text
 
+
+def _inject_byline(text: str, default_author: str = "Praeparium Editorial") -> str:
+    # If an explicit byline already exists, leave it.
+    if re.search(r"(?im)^\*?by\s+.+$", text) or " By " in text[:200] or " by " in text[:200]:
+        return text
+
+    author = os.getenv("PRAEPARIUM_AUTHOR", default_author).strip()
+    lines = text.splitlines()
+    if lines and lines[0].startswith("# "):
+        title = lines[0]
+        rest = lines[1:]
+        return "\n".join([title, f"\n*By {author}*\n", *rest])
+    return f"*By {author}*\n\n{text}"
+
+
 def _has_markdown_table(text: str) -> bool:
+    # Very lightweight heuristic used by our QA
     return ("|---" in text) or ("| --" in text)
+
+
+def _md_cell(val: Any) -> str:
+    if val is None:
+        return ""
+    if isinstance(val, (list, tuple)):
+        return ", ".join(map(str, val))
+    return str(val)
+
 
 def _build_comparison_table(products: List[dict], columns: List[str]) -> str:
     if not products or not columns:
         return ""
-    # Header
     header = "| " + " | ".join(columns) + " |"
     divider = "| " + " | ".join("---" for _ in columns) + " |"
     rows = []
     for p in products:
-        row = []
-        for c in columns:
-            val = p.get(c, "")
-            if isinstance(val, list):
-                val = ", ".join(str(v) for v in val)
-            row.append(str(val))
-        rows.append("| " + " | ".join(row) + " |")
+        row = "| " + " | ".join(_md_cell(p.get(col, "")) for col in columns) + " |"
+        rows.append(row)
     return "\n".join([header, divider, *rows])
+
+
+def _ensure_single_comparison_table(text: str, products: List[dict], columns: List[str]) -> str:
+    """Insert one Comparison Table if none is present and we have data."""
+    if _has_markdown_table(text) or not (products and columns):
+        return text
+    table_md = _build_comparison_table(products, columns)
+    if not table_md:
+        return text
+    # Append under a consistent H2 so QA can find it
+    return text.rstrip() + "\n\n## Comparison Table\n\n" + table_md + "\n"
+
+
+def _dedupe_sources(sources: List[dict]) -> List[dict]:
+    if not sources:
+        return []
+    seen: set[str] = set()
+    out: List[dict] = []
+    for s in sources:
+        key = (s.get("url") or "").strip().lower() or (s.get("title") or "").strip().lower()
+        if key and key not in seen:
+            out.append(s)
+            seen.add(key)
+    return out
+
 
 def _ensure_sources_section(text: str, sources: List[dict]) -> str:
     if "## Sources" in text:
         return text
-    if not sources:
+    srcs = _dedupe_sources(sources)
+    if not srcs:
         return text
     lines = ["\n## Sources\n"]
-    for s in sources:
-        title = s.get("title") or s.get("id") or "Source"
-        url = s.get("url", "")
-        pub = s.get("publisher")
+    for s in srcs:
+        title = (s.get("title") or s.get("id") or "Source").strip()
+        url = (s.get("url") or "").strip()
+        pub = (s.get("publisher") or "").strip()
         label = f"{title}" + (f" ({pub})" if pub else "")
         if url:
             lines.append(f"- [{label}]({url})")
@@ -73,26 +122,31 @@ def _ensure_sources_section(text: str, sources: List[dict]) -> str:
             lines.append(f"- {label}")
     return text.rstrip() + "\n" + "\n".join(lines) + "\n"
 
-def _inject_byline(text: str, default_author: str = "Praeparium Editorial") -> str:
-    # If the doc already has an author line, leave it.
-    if re.search(r"(?im)^by\s+.+$", text) or "By " in text[:200]:
-        return text
-    # Insert after the H1 if present
-    lines = text.splitlines()
-    if lines and lines[0].startswith("# "):
-        title = lines[0]
-        rest = lines[1:]
-        return "\n".join([title, f"\n*By {default_author}*\n", *rest])
-    return f"*By {default_author}*\n\n{text}"
 
-def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: str | None = None) -> bool:
+def _append_internal_links(text: str) -> str:
+    # Always add at least one internal link so QA passes the "internal link" rule.
+    trailing = (
+        "\n**Related:** "
+        "[Water Preparedness Time Ladder](/water-preparedness-time-ladder) · "
+        "[How to Sanitize Water Containers](/sanitize-water-containers)\n"
+    )
+    if trailing.strip() in text:
+        return text
+    return text.rstrip() + "\n" + trailing
+
+
+# -----------------------------
+# Main entry
+# -----------------------------
+def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: Optional[str] = None) -> bool:
     """
-    Generate a publishable article from a structured Source Pack (JSON).
-    Uses writer_prompt_v2.txt for high-quality reasoning, citations, and EEAT output.
-    Also enforces:
-      - Comparison table (if missing) from products/comparison_columns
-      - Sources section from sources[]
-      - Minimal byline and encoding cleanup
+    Generate a publishable article from a structured Source Pack (JSON),
+    using writer_prompt_v2.txt for reasoning + structure, then enforce:
+      • Byline
+      • Encoding cleanup
+      • One comparison table (if none found) from products/comparison_columns
+      • A '## Sources' section (deduped) when missing
+      • At least one internal interlink
     """
     sp = _load_sourcepack(sourcepack_path)
     if not sp or "sources" not in sp or "claims_checklist" not in sp:
@@ -108,7 +162,7 @@ def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: str | None =
         print("[FAIL] OPENAI_API_KEY not set in environment.")
         return False
 
-    org_id = os.getenv("OPENAI_ORG_ID")
+    org_id = os.getenv("OPENAI_ORG_ID") or os.getenv("OPENAI_ORGANIZATION")
     client = OpenAI(api_key=api_key, organization=org_id) if org_id else OpenAI(api_key=api_key)
     model_name = os.getenv("PRAEPARIUM_MODEL", "gpt-4o")
 
@@ -131,6 +185,7 @@ def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: str | None =
         "Return only final Markdown, no commentary."
     )
 
+    # --- Model call ---
     try:
         resp = client.chat.completions.create(
             model=model_name,
@@ -158,22 +213,11 @@ def write_from_sourcepack(sourcepack_path: str, out_dir: str, slug: str | None =
 
     products = sp.get("products", [])
     columns  = sp.get("comparison_columns", [])
-
-    if not _has_markdown_table(text) and products and columns:
-        table_md = _build_comparison_table(products, columns)
-        if table_md:
-            text = text.rstrip() + "\n\n## Comparison Table\n" + table_md + "\n"
-
+    text = _ensure_single_comparison_table(text, products, columns)
     text = _ensure_sources_section(text, sp.get("sources", []))
+    text = _append_internal_links(text)
 
-    # --- Always append internal links so QA has at least one internal link ---
-    text += (
-        "\n**Related:** "
-        "[Water Preparedness Time Ladder](/water-preparedness-time-ladder) · "
-        "[How to Sanitize Water Containers](/sanitize-water-containers)\n"
-    )
-
-    # Write output
+    # --- Write output ---
     os.makedirs(out_dir, exist_ok=True)
     slug = slug or sp.get("slug") or "best-water-storage-containers"
     out_path = pathlib.Path(out_dir) / f"{slug}.md"
