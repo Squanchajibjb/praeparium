@@ -6,6 +6,52 @@
 
 ## TL;DR
 - {{ article.primary_keyword or "Quick guide" }} — for {{ ui.list_join(article.personas) }}
+{% import "_macros.md.j2" as ui %}
+
+{{ ui.section_heading(1, article.title or "How to Sanitize Water Containers") }}
+
+{% if article.author_name %}
+> _By {{ article.author_name }}{% if article.author_credentials %}, {{ article.author_credentials }}{% endif %}{% if article.last_reviewed %} · Last reviewed {{ article.last_reviewed }}{% endif %}_
+{% endif %}
+
+## TL;DR — What you’ll do & who it’s for
+{{ ui.safe(outline.get("who_for"),
+"This step-by-step process cleans and disinfects HDPE #2 or equivalent food-grade containers before storage. Ideal for 72h → 30d+ water plans."
+) }}
+
+## Step-by-step
+{{ ui.safe(outline.get("steps_long"),
+"1) **Inspect & pre-clean**: Remove residues; avoid scented cleaners.\n2) **Mix sanitizing solution**: Use unscented bleach (5–8.25%); follow label directions.\n3) **Contact time**: Wet all internal surfaces; hold for ≥30–60s.\n4) **Rinse**: With potable water; air-dry cap-down.\n5) **Label & date**: Record sanitization and fill date."
+) }}
+
+## Cost, time & tools (quick reference)
+{{ ui.comparison_table(
+  headers = ["Item","Spec/Amount","Notes"],
+  rows    = outline.get("kit_table") or [
+    {"Item":"Unscented household bleach","Spec/Amount":"5–8.25%","For sanitizing/rinse prep"},
+    {"Item":"Food-grade container","Spec/Amount":"HDPE #2","Avoid dairy/juice reuse"},
+    {"Item":"Gloves/eye protection","Spec/Amount":"—","Ventilated area"},
+  ],
+  row_map = {"Item":"Item","Spec/Amount":"Spec/Amount","Notes":"Notes"}
+) }}
+
+## Mistakes to avoid
+{{ ui.safe(outline.get("watchouts"),
+"- Using scented or splash-less bleach products\n- Guessing concentrations instead of measuring\n- Storing near solvents or heat\n- Forgetting to label and rotate"
+) }}
+
+## Preparedness Notes
+{{ ui.safe(outline.get("preparedness_notes"),
+"- Add this task to your 6–12 month rotation cadence.\n- Keep a small log (date, container, issues found)."
+) }}
+
+## FAQs
+{{ ui.safe(outline.get("faqs"),
+"**Can I sanitize PET bottles?** Prefer purpose-made, food-grade containers for longevity.\n\n**Do I need to rinse after sanitizing?** Yes—use potable water."
+) }}
+
+## Sources
+{{ ui.sources_list(article.get("sources") or external_links or [], require_min=2, fallback=article.get("external_source")) }}
 
 
 ## Overview
@@ -25,3 +71,5 @@
 
 
 {{ ui.related_list(related_links) }}
+
+{% include "_jsonld_article.html.j2" %}

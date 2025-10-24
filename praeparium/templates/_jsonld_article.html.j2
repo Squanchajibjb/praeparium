@@ -1,13 +1,32 @@
-﻿<script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": {{ (article.title or "Praeparium Article") | tojson }},
+  "headline": {{ (article.title or 'Praeparium Article') | tojson }},
+  "description": {{ (article.description or article.tldr or '') | tojson }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "url": {{ (('https://www.praeparium.com/' ~ article.slug) if (article and article.slug) else '') | tojson }}
+  },
+  "url": {{ (('https://www.praeparium.com/' ~ article.slug) if (article and article.slug) else '') | tojson }},
   "author": {
     "@type": "Person",
-    "name": {{ ((author.display_name) if author else "Praeparium Editorial") | tojson }}
+    "name": {{ ((article.author and article.author.name) or 'Praeparium Editorial') | tojson }}
+  }{% if article.reviewer and article.reviewer.name %},
+  "reviewedBy": {
+    "@type": "Person",
+    "name": {{ article.reviewer.name | tojson }}
+  }{% endif %},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Praeparium"{% if article.publisher_logo_url %},
+    "logo": { "@type": "ImageObject", "url": {{ article.publisher_logo_url | tojson }} }{% endif %}
   },
-  "datePublished": {{ now_iso | tojson }},
-  "dateModified": {{ now_iso | tojson }}
+  "datePublished": {{ (article.publish_date or article.updated_at or '2025-10-23') | tojson }},
+  "dateModified": {{ (article.updated_at or article.publish_date or '2025-10-23') | tojson }}{% if article.image_url %},
+  "image": {{ article.image_url | tojson }}{% endif %}{% if article.word_count %},
+  "wordCount": {{ article.word_count }}{% endif %}{% if article.language or article.in_language %},
+  "inLanguage": {{ (article.language or article.in_language) | tojson }}{% endif %}{% if article.keywords %},
+  "keywords": {{ (article.keywords | join(', ')) | tojson }}{% endif %}
 }
 </script>

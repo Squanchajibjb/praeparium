@@ -1,31 +1,83 @@
 {% import "_macros.md.j2" as ui %}
 
+{{ ui.section_heading(1, article.title or "Emergency Gear Review") }}
 
-{{ ui.section_heading(1, article.title or "Untitled Review") }}
+{% if article.author_name %}
+> _By {{ article.author_name }}{% if article.author_credentials %}, {{ article.author_credentials }}{% endif %}{% if article.last_reviewed %} · Last reviewed {{ article.last_reviewed }}{% endif %}_
+{% endif %}
 
+## TL;DR — Who Should Choose This
+{{ ui.safe(outline.get("who_for"), "Best for short, planned outages when you can fill from potable tap water. Apartment and suburban households benefit most when floor loads are a concern.") }}
 
-## TL;DR
-- Verdict: {{ ui.safe(outline.get("verdict"), "Good for most readers; check specs and certifications.") }}
+## Quick Verdict — What Stands Out
+{{ ui.safe(outline.get("verdict"), "Solid for short-term, high-volume storage with minimal setup. Not suitable for long-term rotation or reuse.") }}
 
+## Key Specs at a Glance
+{{ ui.safe(outline.get("key_specs"),
+"- Capacity range: 80–100 gal typical\n- Liner: food-grade polymer (single-use)\n- Fill source: potable tap water only\n- Storage duration: event-only; not for long-term rotation\n- Typical cost: $30–$50"
+) }}
 
-## Who Should Choose This
-{{ ui.safe(outline.get("who_for"), "Best for readers who want a reliable, straightforward option.") }}
+## When This Shines — Attribute → Benefit
+{{ ui.safe(outline.get("benefits"),
+"- **High capacity in minutes** → fills from a tub without new shelving\n- **Weight borne by subfloor** → tubs are designed to support water loads\n- **Contamination control** → liner separates water from tub surfaces"
+) }}
 
+## Setup — How to Clean, Fit & Fill Safely
+{{ ui.safe(outline.get("setup_steps"),
+"1) Clean tub surface; avoid scented/antibacterial cleaners that leave residues.\n2) Inspect liner for damage; seat the fill adapter firmly.\n3) Fill from potable tap; monitor overflow. Keep pets/children out.\n4) Seal per manufacturer instructions; label fill date/time."
+) }}
 
-## Pros & Cons
-{{ ui.safe(outline.get("pros_cons"), "**Pros**: easy to use, durable\n\n**Cons**: price, availability") }}
+## Safety & Contamination — How to Avoid Spoilage
+{{ ui.safe(outline.get("safety"),
+"- Use unscented household bleach for emergency disinfection only when instructed by authorities.\n- Do **not** reuse single-use liners.\n- After use, dispose of liner; sanitize tub thoroughly."
+) }}
 
+## Comparison Table — Top Picks & Use-Cases
+{{ ui.comparison_table(
+    headers = article.get("comparison_headers") or comparison_columns or
+              ["Model","Capacity (gal)","Material/Liner","NSF/ANSI","Reuse","Price (USD)","Best for"],
+    rows    = article.get("comparison_rows") or
+              (products | list if products is not none else []) or
+              (outline.get("comparison_table") or []),
+    row_map = article.get("comparison_row_map") or {
+        "Model":"name", "Capacity (gal)":"capacity_gal", "Material/Liner":"material",
+        "NSF/ANSI":"nsf", "Reuse":"reuse", "Price (USD)":"price_usd", "Best for":"best_for"
+    }
+) }}
 
-## What to Watch Out For
-{{ ui.safe(outline.get("watchouts"), "Confirm materials and certifications before purchase.") }}
+## What to Watch Out For — Common Mistakes
+{{ ui.safe(outline.get("watchouts"),
+"- Overfilling past overflow drain\n- Using non-potable sources\n- Assuming liners are reusable\n- Storing for weeks without rotation plan"
+) }}
 
+## Alternatives — When to Choose Something Else
+{{ ui.safe(outline.get("alternatives"),
+"- **Stackable 5–7 gal containers** → rotation-friendly, modular.\n- **55-gal drums** → long-term storage (floor load planning needed).\n- **Bottled water** → simplest for 72h kits."
+) }}
 
-## Alternatives
-{{ ui.safe(outline.get("alternatives"), "- Option A — lighter\n- Option B — cheaper") }}
+## FAQs
+{{ ui.safe(outline.get("faqs"),
+"**Can I reuse the liner?** No; single-use only.\n\n**How long can water sit?** Event-only; follow manufacturer and local guidance.\n\n**Do I still need filters?** Keep a point-of-use filter for post-event quality issues."
+) }}
 
+## Preparedness Notes
+{{ ui.safe(outline.get("preparedness_notes"),
+"- Keep bleach (5–8.25% sodium hypochlorite) on hand; store away from metals.\n- Add this to a time-ladder plan (72h → 2w → 30d+)."
+) }}
 
-{{ ui.quote_block(article.quote_text, article.quote_source) }}
-{{ ui.stat_line(article.stats_value, article.stats_source) }}
-
+## Sources
+{{ ui.sources_list(
+    article.get("sources") or external_links or [],
+    require_min=2,
+    fallback=article.get("external_source")
+) }}
 
 {{ ui.related_list(related_links) }}
+
+{# Optional JSON-LD include if your site consumes it #}
+{% if article.enable_jsonld %}
+{% include "_jsonld_article.html.j2" %}
+{% endif %}
+
+{% include "_jsonld_article.html.j2" %}
+

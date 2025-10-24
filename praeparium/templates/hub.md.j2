@@ -1,27 +1,48 @@
 {% import "_macros.md.j2" as ui %}
 
+{{ ui.section_heading(1, article.title or "Water Preparedness Time Ladder") }}
 
-{{ ui.section_heading(1, article.title or "Untitled Hub") }}
+{% if article.author_name %}
+> _By {{ article.author_name }}{% if article.author_credentials %}, {{ article.author_credentials }}{% endif %}{% if article.last_reviewed %} · Last reviewed {{ article.last_reviewed }}{% endif %}_
+{% endif %}
 
+## TL;DR — Who this is for
+{{ ui.safe(outline.get("who_for"),
+"This ladder is for households building a practical water plan without overbuying: apartments and suburban homes with limited space."
+) }}
 
-## TL;DR
-- {{ article.primary_keyword or "Key takeaways" }} — quick summary for {{ ui.list_join(article.personas) }}
+## Timeframe ladder (72h → 2w → 30d+)
+{{ ui.safe(outline.get("time_ladder"),
+"- **72h**: 1 gal/person/day minimum for drinking and basic food prep.\n- **2w**: scale to 14 gal/person; add modular containers.\n- **30d+**: diversify storage + treatment; plan rotation."
+) }}
 
+## Core decisions (attribute → benefit)
+{{ ui.safe(outline.get("core_decisions"),
+"- **Container type** → balances space, stackability, and rotation.\n- **Treatment strategy** → disinfection vs. filtration for your water source.\n- **Placement & floor load** → keep weight spread; avoid hot spots."
+) }}
 
-## Why It Matters
-{{ ui.safe(outline.get("why"), "Every prepper needs the essentials squared away before an emergency.") }}
+## Quick comparison (at a glance)
+{{ ui.comparison_table(
+  headers = article.get("comparison_headers") or ["Option","Capacity","Rotation","Space use","Setup","Best for"],
+  rows    = article.get("comparison_rows") or (outline.get("comparison_table") or []),
+  row_map = article.get("comparison_row_map") or {"Option":"option","Capacity":"capacity","Rotation":"rotation","Space use":"space","Setup":"setup","Best for":"best_for"}
+) }}
 
-
-## The Framework
-{{ ui.safe(outline.get("framework"), "Use a simple time-ladder (72h → 1w → 30d) to stage purchases and storage.") }}
-
-
-## How to Prepare
-{{ ui.safe(outline.get("how"), "Start with stored water, then add treatment and containers. Rotate on a schedule.") }}
-
-
-{{ ui.quote_block(article.quote_text, article.quote_source) }}
-{{ ui.stat_line(article.stats_value, article.stats_source) }}
-
-
+## Spokes (related guides & reviews)
 {{ ui.related_list(related_links) }}
+
+## Preparedness Notes
+{{ ui.safe(outline.get("preparedness_notes"),
+"- Label, date, and rotate stored water.\n- Keep unscented bleach (5–8.25%) on hand for emergency disinfection.\n- Rehearse a 10-minute ‘fill the tub’ drill for planned outages."
+) }}
+
+## FAQs
+{{ ui.safe(outline.get("faqs"),
+"**Is 1 gal/person/day enough?** It covers drinking + light cooking; hygiene increases needs.\n\n**Do I need filters if I store water?** Yes—a point-of-use filter helps post-event taste/clarity."
+) }}
+
+## Sources
+{{ ui.sources_list(article.get("sources") or external_links or [], require_min=2, fallback=article.get("external_source")) }}
+
+{% include "_jsonld_article.html.j2" %}
+
