@@ -1,0 +1,47 @@
+﻿{
+  "title": "Emergency Bathtub Water Bladders (2025): Setup, Safety, and When to Use",
+  "slug": "bathtub-emergency-water-bladders",
+  "stance": {
+    "audience": "Apartment dwellers and homeowners who want short-term, high-volume safe water during outages",
+    "promise": "Show exactly when a bathtub bladder makes sense, how to set it up safely, and the trade-offs vs other storage",
+    "voice": "plain, practical, evidence-based"
+  },
+  "claims_checklist": [
+    "Explain that bathtub bladders are for short-term emergencies (days to weeks) and defer to manufacturer guidance on max duration",
+    "Quantify water weight and typical bathtub volumes (8.34 lb/gal; 50–80 gal common) and note structure support is generally better under tubs",
+    "Stress single-use liners and contamination risks: only fill with potable tap water from a safe supply",
+    "Clear setup steps: clean tub surface, inspect liner, fit fill hose, protect against stopper/overflow issues, keep pets/children out",
+    "Highlight that bladders are not a rotation solution; pair with containers or bottled water for the ladder (72h→2w→30d+)",
+    "Provide at least 3 authoritative sources and one lived-experience/forum insight",
+    "Include disposal guidance and post-event sanitization of tub"
+  ],
+  "quotes": [
+    {
+      "quote": "Store at least one gallon of water per person per day for at least three days.",
+      "source": "CDC Emergency Water Supply",
+      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+    },
+    {
+      "quote": "Emergency disinfection of drinking water can be done with household bleach or chlorine tablets.",
+      "source": "EPA Ground Water & Drinking Water",
+      "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"
+    },
+    {
+      "quote": "A full bathtub or container holds significant weight; water weighs about 8.34 pounds per gallon.",
+      "source": "Water weight reference",
+      "url": "https://en.wikipedia.org/wiki/Gallon#Weight_of_water"
+    },
+    {
+      "quote": "Many apartment preppers keep bladders for boil-water advisories and hurricanes—single-use, then dispose.",
+      "source": "Reddit r/preppers (anecdotal insight)",
+      "url": "https://www.reddit.com/r/preppers"
+    }
+  ],
+  "sources": [
+    { "title": "CDC: Emergency Water Supply", "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html" },
+    { "title": "EPA: Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water" },
+    { "title": "FEMA/Ready: Water Guidance", "url": "https://www.ready.gov/water" },
+    { "title": "Water weight reference", "url": "https://en.wikipedia.org/wiki/Gallon#Weight_of_water" }
+  ],
+  "structure": "# H1: Emergency Bathtub Water Bladders (2025): Setup, Safety, and When to Use\n> Quick Verdict (2–3 sentences on fit/caveats)\n\n## When a Bathtub Bladder Makes Sense\n## Capacity, Weight & Where Tubs Shine\n## Setup: Clean, Fit, Fill (Step-by-step)\n## Safety & Contamination Risks\n## Rotation & The Water Ladder\n## Alternatives to Consider\n## Forum Insight\n## FAQs\n## Sources\n\nSTYLE: Plain, active voice. No brand claims. Cite quantitative claims as [Source: ShortName]."
+}

@@ -1,0 +1,187 @@
+{#
+  Praeparium — Benchmark Hub Template (topic-agnostic)
+  File: praeparium/sop3/templates/hub.md.j2
+  Contract: Implements Hub Section Directive Schema v1.2
+  Notes:
+    • No em dashes. Use commas or semicolons only.
+    • No pricing anywhere. Do not render currency tokens.
+    • This template is topic-neutral. Domain vocabulary comes from the Topic Adapter.
+    • Expects SOP 2 to provide the fields shown below (see schema doc).
+#}
+
+{# -----------------------------
+   Helper macros (minimal)
+   These do not hard-fail rendering; they emit TODO markers that QA will catch.
+   You can replace them with your stricter _macros.md.j2 as needed.
+------------------------------ #}
+{% macro require_text(value, msg) -%}
+{%- if not value or value|trim == '' -%}
+> **TODO:** {{ msg }}
+{%- else -%}
+{{ value }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro h2_attr_benefit(title) -%}
+{%- if not title or not title|regex_match('^\S.+:\s.+$') -%}
+> **TODO:** H2 must be Attribute:Benefit format. Fix title.
+{{ title or 'Missing title' }}
+{%- else -%}
+{{ title }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro ensure_paragraph_block(text, min_paras=2) -%}
+{%- set t = (text or '') -%}
+{%- set paras = t.split('\n\n') -%}
+{%- if paras|length < min_paras -%}
+> **TODO:** Provide at least {{ min_paras }} paragraphs before any list.
+{{ t }}
+{%- else -%}
+{{ t }}
+{%- endif -%}
+{%- endmacro %}
+
+{% macro cite_block(items) -%}
+{%- if items and items|length > 0 -%}
+{%- for c in items -%}[{{ c.label or 'source' }}]({{ c.url }}){%- if not loop.last %}, {% endif -%}{%- endfor -%}
+{%- else -%}
+> **TODO:** Add at least one citation.
+{%- endif -%}
+{%- endmacro %}
+
+{# -----------------------------
+   Page header
+------------------------------ #}
+# {{ title }}
+
+{{ require_text(lede, 'Lede paragraph required immediately after H1.') }}
+
+{# -----------------------------
+   1) Why this matters
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.why_topic_matters or 'Why This Matters: Put Risks Into Context') }}
+{{ ensure_paragraph_block(sections.why_topic_matters.prose, 2) }}
+
+{% if sections.why_topic_matters.citations %}
+> Sources: {{ cite_block(sections.why_topic_matters.citations) }}
+{% endif %}
+
+{# Optional community facts snapshot #}
+{% if community_facts %}
+> **Community Snapshot**  
+{%- for f in community_facts %}• {{ f.text }}  
+{%- endfor -%}
+{% if facts_source %}_Source: {{ facts_source.label }} ({{ facts_source.date }})_{% endif %}
+{% endif %}
+
+{# -----------------------------
+   2) Key concepts and definitions
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.key_concepts_and_definitions or 'Key Concepts: Understand the Basics') }}
+{{ ensure_paragraph_block(sections.key_concepts_and_definitions.prose, 2) }}
+{% if sections.key_concepts_and_definitions.citations %}
+> Sources: {{ cite_block(sections.key_concepts_and_definitions.citations) }}
+{% endif %}
+
+{# -----------------------------
+   3) Buyer criteria / selection framework (no brands)
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.buyer_criteria or 'Selection Criteria: Choose What Fits Your Situation') }}
+{{ ensure_paragraph_block(sections.buyer_criteria.prose, 2) }}
+
+{# -----------------------------
+   4) Testing and evidence
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.testing_and_evidence or 'Testing and Evidence: Know What Good Looks Like') }}
+{{ ensure_paragraph_block(sections.testing_and_evidence.prose, 2) }}
+{% if sections.testing_and_evidence.citations %}
+> Sources: {{ cite_block(sections.testing_and_evidence.citations) }}
+{% endif %}
+
+{# -----------------------------
+   5) Tiered recommendations / representative solutions (no prices)
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.tiered_recommendations or 'Representative Solutions: Match Options to Needs') }}
+{% if representative_products %}
+| {{ adapter.columns.product or 'Product' }} | {{ adapter.columns.best_for or 'Best For' }} | {{ adapter.columns.specs or 'Key Specs' }} | {{ adapter.columns.certifications or 'Certifications' }} | {{ adapter.columns.evidence or 'Evidence' }} |
+|---|---|---|---|---|
+{% for cat in representative_products %}
+{# Cat header row, rendered as italic text spanning columns #}
+| *{{ cat.category }}* |  |  |  |  |
+  {%- for p in cat.examples %}
+  | {{ p.name }} | {{ p.best_for or '—' }} | {{ p.specs|map('join', ': ')|join('; ') if p.specs else '—' }} | {{ (p.certifications or [])|join(', ') or '—' }} | {%- if p.claim_evidence %}{% for e in p.claim_evidence %}[{{ e.label or 'evidence' }}]({{ e.url }}){% if not loop.last %}, {% endif %}{% endfor %}{% else %}—{% endif %} |
+  {%- endfor %}
+{% endfor %}
+{% else %}
+> **TODO:** Provide representative_products with examples. No prices.
+{% endif %}
+
+{# -----------------------------
+   6) Maintenance and practical guidance
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.maintenance_and_practical_guidance or 'Maintenance: Keep Your System Working') }}
+{{ ensure_paragraph_block(sections.maintenance_and_practical_guidance.prose, 2) }}
+
+{% if rotation_advice %}
+**Routine**  
+{%- for tip in rotation_advice %}• {{ tip }}  
+{%- endfor -%}
+{% endif %}
+
+{% if storage_advice %}
+**Storage Tips**  
+{%- for tip in storage_advice %}• {{ tip }}  
+{%- endfor -%}
+{% endif %}
+
+{% if purification_advice %}
+**Operation or Safety**  
+{%- for tip in purification_advice %}• {{ tip }}  
+{%- endfor -%}
+{% endif %}
+
+{# -----------------------------
+   7) Common mistakes
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.common_mistakes or 'Common Mistakes: Avoid Problems Before They Start') }}
+{{ ensure_paragraph_block(sections.common_mistakes.prose, 2) }}
+
+{# -----------------------------
+   8) Regional and environmental adjustments
+------------------------------ #}
+## {{ h2_attr_benefit(adapter.headings.regional_and_environmental_adjustments or 'Adjust for Region and Season') }}
+{{ ensure_paragraph_block(sections.regional_and_environmental_adjustments.prose, 2) }}
+
+{# -----------------------------
+   9) FAQs
+------------------------------ #}
+## {{ adapter.headings.faqs or 'FAQs' }}
+{% if faqs %}
+{%- for f in faqs %}
+### {{ f.q }}
+{{ require_text(f.a, 'FAQ answer must include at least one paragraph and one link.') }}
+{%- endfor -%}
+{% else %}
+> **TODO:** Provide 6–12 FAQ entries.
+{% endif %}
+
+{# -----------------------------
+   10) Further reading and closing
+------------------------------ #}
+## {{ adapter.headings.further_reading_and_closing or 'Further Reading' }}
+{% if interlink_map %}
+{{ ui.related_list(interlink_map) }}
+{% else %}
+> **TODO:** Provide interlink_map with at least three spokes.
+{% endif %}
+
+{% if lead_magnet_idea %}
+> **Download:** {{ lead_magnet_idea.title }} — {{ lead_magnet_idea.blurb }}
+{% endif %}
+
+{# -----------------------------
+   Footer EEAT blocks and JSON-LD
+------------------------------ #}
+{% include "_author_box.html.j2" %}
+{% include "_jsonld_article.html.j2" %}

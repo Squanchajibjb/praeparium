@@ -1,48 +1,80 @@
 {
-  "stance": {
-    "audience": "Apartment dwellers and suburban homeowners preparing for water outages",
-    "promise": "Pick safe water containers for 72 hours, 2 weeks, and 30+ days",
-    "voice": "plain, confident, evidence-based"
-  },
-  "claims_checklist": [
-    "Reference the water time ladder (72h→2w→30d+)",
-    "Include rotation doctrine: 6–12 months, label, drain/refill",
-    "Describe ergonomics: 55gal ≈ 460lb / 208kg; floor-load 40–50 lb/ft²; distribute weight",
-    "Compare stackables, 55-gal barrels, collapsible cubes, inflatable bathtub bladders",
-    "Include at least one forum or lived-experience insight",
-    "Use ≥3 authoritative citations and show Sources section"
-  ],
-  "quotes": [
+  "pack_id": "water_containers",
+  "domain": "Water",
+  "version": "1.0",
+  "title": "Best Water Storage Containers (2025)",
+  "slug": "best-water-storage-containers",
+
+  "sources": [
     {
-      "quote": "Store at least one gallon per person per day for three days.",
-      "source": "CDC Emergency Water Supply",
-      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
+      "id": "cdc-water-storage-2024",
+      "title": "Emergency Water Storage Guidance",
+      "url": "https://www.cdc.gov/healthywater/emergency/index.html",
+      "publisher": "CDC",
+      "accessed": "2025-10-22"
     },
     {
-      "quote": "Emergency disinfection of drinking water can be done with household bleach or chlorine tablets.",
-      "source": "EPA Ground Water & Drinking Water",
-      "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"
-    },
-    {
-      "quote": "55-gallon water barrels must rest on strong, level surfaces; full weight exceeds 450 lb (200 kg).",
-      "source": "FEMA Family Preparedness Guide",
-      "url": "https://www.ready.gov/water"
-    },
-    {
-      "quote": "Rotate stored tap water every six to twelve months.",
-      "source": "CDC",
-      "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"
-    },
-    {
-      "quote": "Apartment preppers recommend stackable cubes to spread load and keep water under beds.",
-      "source": "Reddit r/preppers (2024)",
-      "url": "https://www.reddit.com/r/preppers"
+      "id": "nsf-ansi-61",
+      "title": "NSF/ANSI 61 Drinking Water System Components",
+      "url": "https://www.nsf.org/knowledge-library/ansi-nsf-standards-for-drinking-water",
+      "publisher": "NSF",
+      "accessed": "2025-10-22"
     }
   ],
-  "sources": [
-    {"title": "CDC Emergency Water Supply", "url": "https://www.cdc.gov/healthywater/emergency/drinking/creating-storing-emergency-water-supply.html"},
-    {"title": "EPA Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
-    {"title": "FEMA Preparedness Guide", "url": "https://www.ready.gov/water"},
-    {"title": "NSF/ANSI Standards 42/53", "url": "https://www.nsf.org"}
+
+  "claims_checklist": [
+    "Any 'food-grade' claim must specify HDPE #2 or equivalent and cite a source.",
+    "Any 'BPA-free' claim must cite manufacturer documentation or third-party verification.",
+    "Any 'NSF' claim must include the exact standard (e.g., NSF/ANSI 61) and a primary link."
+  ],
+
+  "products": [
+    {
+      "name": "AquaBrick 5-Gallon",
+      "brand": "AquaBrick",
+      "capacity_l": 18.9,
+      "material": "Food-grade HDPE #2",
+      "certifications": ["BPA-free"],
+      "stackable": true,
+      "footprint": "10.5×19×6.5 in",
+      "price_usd": 39.99,
+      "affiliate_urls": ["https://example.com/abrick"]
+    },
+    {
+      "name": "Blue 55-Gallon Drum",
+      "brand": "Various",
+      "capacity_l": 208,
+      "material": "Food-grade HDPE #2",
+      "certifications": ["NSF/ANSI 61"],
+      "stackable": false,
+      "footprint": "23×35 in (Ø×H)",
+      "price_usd": 109.00,
+      "affiliate_urls": ["https://example.com/blue55"]
+    }
+  ],
+
+  "comparison_columns": [
+    "name","brand","capacity_l","material","certifications","stackable","footprint","price_usd"
+  ],
+
+  "articles": [
+    {
+      "article_id": "water-preparedness-time-ladder",
+      "type": "HUB",
+      "slug": "water-preparedness-time-ladder",
+      "require_comparison_table": true
+    },
+    {
+      "article_id": "bathtub-emergency-water-bladders",
+      "type": "REVIEW",
+      "slug": "bathtub-emergency-water-bladders",
+      "require_comparison_table": true
+    },
+    {
+      "article_id": "sanitize-water-containers",
+      "type": "GUIDE",
+      "slug": "sanitize-water-containers",
+      "require_comparison_table": true
+    }
   ]
 }

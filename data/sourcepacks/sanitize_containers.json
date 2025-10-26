@@ -1,4 +1,4 @@
-{
+﻿{
   "stance": {
     "audience": "People preparing tap water storage at home",
     "promise": "Clean and disinfect any water container correctly before filling",
@@ -33,5 +33,7 @@
     {"title": "EPA Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
     {"title": "FEMA Preparedness Guide", "url": "https://www.ready.gov/water"}
   ],
-  "slug": "sanitize-water-containers"
+  "slug": "sanitize-water-containers",
+  "title": "How to Sanitize Water Containers (2025)",
+  "structure": "# H1: How to Sanitize Water Containers (2025)\n> What You’ll Learn\n\n## Safety First (risks, PPE, bleach concentrations)\n## Step-by-Step\n## Troubleshooting & Mistakes\n## FAQs\n## Sources\n\nSTYLE: Step-by-step imperative. Cite as [Source: ShortName]."
 }

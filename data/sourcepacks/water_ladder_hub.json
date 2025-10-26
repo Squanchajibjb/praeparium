@@ -1,4 +1,4 @@
-{
+﻿{
   "stance": {
     "audience": "Households preparing for water outages in apartments or homes",
     "promise": "A simple time ladder to size, store, and maintain safe water",
@@ -38,5 +38,7 @@
     {"title": "EPA Emergency Disinfection", "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water"},
     {"title": "FEMA Preparedness Guide", "url": "https://www.ready.gov/water"}
   ],
-  "slug": "water-preparedness-time-ladder"
+  "slug": "water-preparedness-time-ladder",
+  "title": "Water Preparedness Time Ladder (2025)",
+  "structure": "# H1: Water Preparedness Time Ladder (2025)\n> Who this is for + ladder summary\n\n## The Water Time Ladder (72h → 2w → 30d+)\n## How Much to Store (per person math + examples)\n## Where to Put It (weight, floor load, distribution)\n## Rotation & Sanitation\n## Links to Related Guides\n## Sources\n\nSTYLE: Plain, confident, with simple math examples. Cite as [Source: ShortName]."
 }

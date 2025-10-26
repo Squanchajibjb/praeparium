@@ -33,3 +33,8 @@ praeparium/\C:\Users\mcint\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerS
 
 praeparium/\C:\Users\mcint\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1.txt
 
+
+# secrets
+ scripts/set-openAI.ps1
+ .env
+
