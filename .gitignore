@@ -57,3 +57,10 @@ praeparium/\C:\Users\mcint\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerS
  scripts/set-openAI.ps1
  scripts/set-openAI.PS1
 
+
+# never track secrets
+.env
+.env.*
+*.key
+*.ps1
+
