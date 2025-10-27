@@ -38,3 +38,8 @@ praeparium/\C:\Users\mcint\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerS
  scripts/set-openAI.ps1
  .env
 
+
+# secrets
+ scripts/set-openAI.ps1
+ .env
+
